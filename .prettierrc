@@ -1,0 +1,15 @@
+{
+  "bracketSameLine": true,
+  "plugins": [
+    "prettier-plugin-tailwindcss"
+  ],
+  "overrides": [
+    {
+      "files": "*.md",
+      "options": {
+        "parser": "markdown"
+      }
+    }
+  ],
+  "tailwindStylesheet": "./src/app/globals.css"
+}
