@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# README
 
-## Getting Started
+## Features
 
-First, run the development server:
+- Save bookmarks with title, URL, and tags
+- Organize with tag-based filtering
+- Light/dark mode support
+- Responsive design (desktop sidebar, mobile modal)
+- Cloud-based persistence with Supabase
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Tech Stack
+
+- React
+- Next.js 15 (App Router)
+- TypeScript
+- Tailwind CSS 4
+- Supabase (PostgreSQL + Auth)
+
+## Improvements
+
+## Run locally
+
+```sh
+npm install
+npm run dev # http://localhost:3000
+
+## Screenshot
+
+## Notes
+
+```sh
+cd ~/Dev
+npx create-next-app@latest web_bookmarks
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```txt
+✔ Would you like to use the recommended Next.js defaults? › No, customize settings
+✔ Would you like to use TypeScript? … No / _Yes_
+✔ Which linter would you like to use? › ESLint
+✔ Would you like to use React Compiler? … _No_ / Yes
+✔ Would you like to use Tailwind CSS? … No / _Yes_
+✔ Would you like your code inside a `src/` directory? … No / _Yes_
+✔ Would you like to use App Router? (recommended) … No / _Yes_
+✔ Would you like to customize the import alias (`@/*` by default)? … _No_ / Yes
+✔ Would you like to include AGENTS.md to guide coding agents to write up-to-date Next.js code? … _No_ / Yes
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Install the VSCode [Prettier plugin](https://github.com/tailwindlabs/prettier-plugin-tailwindcss):
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```sh
+npm install -D prettier prettier-plugin-tailwindcss
+```
 
-## Learn More
+Create `.prettierrc` at the root level of the project and use the correct path for your CSS file.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```json
+{
+  "bracketSameLine": true,
+  "plugins": [
+    "prettier-plugin-tailwindcss"
+  ],
+  "overrides": [
+    {
+      "files": "*.md",
+      "options": {
+        "parser": "markdown"
+      }
+    }
+  ],
+  "tailwindStylesheet": "./src/app/globals.css"
+}
+```
