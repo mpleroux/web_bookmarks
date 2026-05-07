@@ -96,3 +96,28 @@ create index IF not exists bookmarks_user_id_idx on public.bookmarks using btree
 
 create index IF not exists bookmarks_created_at_idx on public.bookmarks using btree (created_at) TABLESPACE pg_default;
 ```
+
+### Supabase
+
+Install Supabase:
+
+```sh
+npm install @supabase/supabase-js
+```
+
+Don't forget the `@` before the first `supabase` or it will install a random supabase package from GitHub.
+
+Sample config file at `src/utils/supabase.ts`. It reads credentials from `.env.local` and creates a Supabase client for database calls.
+
+```ts
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error("Missing Supabase environment variables");
+}
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+```
