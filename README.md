@@ -1,5 +1,7 @@
 # README
 
+This will soon be a website bookmarking site modeled on Pinboard.in using React and Next.js. It's a work-in-progress and there's nothing to see here yet.
+
 ## Features
 
 - Save bookmarks with title, URL, and tags
@@ -11,7 +13,7 @@
 ## Tech Stack
 
 - React
-- Next.js 15 (App Router)
+- Next.js (App Router)
 - TypeScript
 - Tailwind CSS 4
 - Supabase (PostgreSQL + Auth)
@@ -23,6 +25,7 @@
 ```sh
 npm install
 npm run dev # http://localhost:3000
+```
 
 ## Screenshot
 
