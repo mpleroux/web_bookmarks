@@ -1,6 +1,6 @@
 # README
 
-This will soon be a website bookmarking site modeled on Pinboard.in using React and Next.js. It's a work-in-progress and there's nothing to see here yet.
+A website bookmarking site modeled on Pinboard.in using React and Next.js. Work-in-progress.
 
 ## Features
 
@@ -31,6 +31,8 @@ npm run dev # http://localhost:3000
 
 ## Notes
 
+### create-next-app
+
 ```sh
 cd ~/Dev
 npx create-next-app@latest web_bookmarks
@@ -47,6 +49,8 @@ npx create-next-app@latest web_bookmarks
 ✔ Would you like to customize the import alias (`@/*` by default)? … _No_ / Yes
 ✔ Would you like to include AGENTS.md to guide coding agents to write up-to-date Next.js code? … _No_ / Yes
 ```
+
+### Prettier plugin
 
 Install the VSCode [Prettier plugin](https://github.com/tailwindlabs/prettier-plugin-tailwindcss):
 
@@ -72,4 +76,23 @@ Create `.prettierrc` at the root level of the project and use the correct path f
   ],
   "tailwindStylesheet": "./src/app/globals.css"
 }
+```
+
+### Database migrations
+
+```sql
+create table public.bookmarks (
+  id uuid not null default gen_random_uuid (),
+  user_id uuid not null,
+  title text not null,
+  url text not null,
+  tags text[] null default array[]::text[],
+  created_at timestamp with time zone null default now(),
+  updated_at timestamp with time zone null default now(),
+  constraint bookmarks_pkey primary key (id)
+) TABLESPACE pg_default;
+
+create index IF not exists bookmarks_user_id_idx on public.bookmarks using btree (user_id) TABLESPACE pg_default;
+
+create index IF not exists bookmarks_created_at_idx on public.bookmarks using btree (created_at) TABLESPACE pg_default;
 ```
