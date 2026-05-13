@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/*
 html {
   color-scheme: light dark;
 }
@@ -9,4 +10,78 @@ body {
   padding: 0;
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+*/
+
+/* define the custom dark variant for utility classes */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* set default (light mode) values */
+  --color-page-bg: var(--color-gray-100);
+  --color-page-text: var(--color-gray-800);
+  --color-link: var(--color-gray-600);
+  --color-button: var(--color-gray-400);
+  --color-button-hover: var(--color-gray-500);
+}
+
+/* manual toggle: if .dark class is on <html> */
+.dark {
+  --color-page-bg: var(--color-gray-900);
+  --color-page-text: var(--color-gray-200);
+  --color-link: var(--color-blue-400);
+  --color-button: var(--color-gray-500);
+  --color-button-hover: var(--color-gray-600);
+}
+
+/* add basic styles after Preflight */
+@layer base {
+  body {
+    @apply bg-page-bg text-page-text;
+  }
+  h1 {
+    @apply mb-5 text-2xl font-bold tracking-tight sm:text-3xl;
+  }
+  h2 {
+    @apply mb-4 text-xl font-semibold sm:text-2xl;
+  }
+  h3 {
+    @apply mb-3 text-lg font-semibold sm:text-xl;
+  }
+  h4 {
+    @apply mb-3 text-base font-semibold sm:text-lg;
+  }
+  p {
+    @apply mb-4;
+  }
+  ul {
+    @apply mb-4 list-disc pl-4;
+  }
+  ol {
+    @apply mb-4 list-decimal pl-4;
+  }
+  li > ul,
+  li > ol {
+    @apply mb-0 list-[circle];
+  }
+  a {
+    @apply text-link underline transition-opacity hover:opacity-80;
+  }
+  pre {
+    @apply mb-4 px-4 py-2 text-xs sm:text-sm;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      @apply animate-none! scroll-auto! transition-none!;
+    }
+  }
+}
+
+@layer components {
+  button {
+    @apply cursor-pointer rounded bg-button px-4 py-2 font-semibold text-white transition hover:cursor-pointer hover:bg-button-hover;
+  }
 }

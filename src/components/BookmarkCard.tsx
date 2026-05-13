@@ -2,7 +2,7 @@ import type { Bookmark } from "@/types";
 
 export default function BookmarkCard({ bookmark }: { bookmark: Bookmark }) {
   return (
-    <>
+    <div>
       <p>Title: {bookmark.title}</p>
       <p>URL: {bookmark.url}</p>
       <p>
@@ -11,8 +11,9 @@ export default function BookmarkCard({ bookmark }: { bookmark: Bookmark }) {
           <span key={tag}>{tag}</span>
         ))}
       </p>
+
       <button>Edit</button>
       <button>Delete</button>
-    </>
+    </div>
   );
 }
