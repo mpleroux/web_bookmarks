@@ -1,3 +1,5 @@
+"use client";
+
 import { useContext, createContext, useState, useCallback } from "react";
 import type { ReactNode } from "react";
 import { Bookmark, BookmarksContextType } from "@/types";
