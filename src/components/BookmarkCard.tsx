@@ -1,6 +1,16 @@
 import type { Bookmark } from "@/types";
 
-export default function BookmarkCard({ bookmark }: { bookmark: Bookmark }) {
+interface BookmarkCardProps {
+  bookmark: Bookmark;
+  onEdit: (bookmark: Bookmark) => void;
+  onDelete: (bookmark: Bookmark) => void;
+}
+
+export default function BookmarkCard({
+  bookmark,
+  onEdit,
+  onDelete,
+}: BookmarkCardProps) {
   return (
     <div>
       <p>Title: {bookmark.title}</p>
@@ -12,8 +22,12 @@ export default function BookmarkCard({ bookmark }: { bookmark: Bookmark }) {
         ))}
       </p>
 
-      <button>Edit</button>
-      <button>Delete</button>
+      <button type="button" onClick={() => onEdit(bookmark)}>
+        Edit
+      </button>
+      <button type="button" onClick={() => onDelete(bookmark)}>
+        Delete
+      </button>
     </div>
   );
 }
