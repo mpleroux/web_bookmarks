@@ -7,11 +7,14 @@ import Layout from "@/components/Layout";
 import BookmarkList from "@/components/BookmarkList";
 import AddEditBookmarkModal from "@/components/AddEditBookmarkModal";
 import DeleteConfirmationModal from "@/components/DeleteConfirmationModal";
+import FilterByTagModal from "@/components/FilterByTagModal";
+import TagSidebar from "@/components/TagSidebar";
 
 export default function Home() {
   const { fetchBookmarks } = useBookmarks();
   const [isAddEditModalOpen, setIsAddEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [selectedBookmark, setSelectedBookmark] = useState<
     Bookmark | undefined
   >(undefined);
@@ -35,6 +38,14 @@ export default function Home() {
     setIsDeleteModalOpen(true);
   };
 
+  const handleOpenFilter = () => {
+    setIsFilterModalOpen(true);
+  };
+
+  const handleCloseFilter = () => {
+    setIsFilterModalOpen(false);
+  };
+
   const handleCloseAddEdit = () => {
     setIsAddEditModalOpen(false);
     setSelectedBookmark(undefined);
@@ -51,7 +62,12 @@ export default function Home() {
         Add Bookmark
       </button>
 
+      <button type="button" onClick={handleOpenFilter}>
+        Filter by Tag
+      </button>
+
       <BookmarkList onEdit={handleEdit} onDelete={handleDelete} />
+      <TagSidebar />
 
       {isAddEditModalOpen && (
         <AddEditBookmarkModal
@@ -65,6 +81,8 @@ export default function Home() {
           onClose={handleCloseDelete}
         />
       )}
+
+      {isFilterModalOpen && <FilterByTagModal onClose={handleCloseFilter} />}
     </Layout>
   );
 }
