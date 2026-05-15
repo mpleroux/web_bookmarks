@@ -8,6 +8,7 @@ import BookmarkList from "@/components/BookmarkList";
 import AddEditBookmarkModal from "@/components/AddEditBookmarkModal";
 import DeleteConfirmationModal from "@/components/DeleteConfirmationModal";
 import FilterByTagModal from "@/components/FilterByTagModal";
+import SearchBar from "@/components/SearchBar";
 import TagSidebar from "@/components/TagSidebar";
 
 export default function Home() {
@@ -66,6 +67,7 @@ export default function Home() {
         Filter by Tag
       </button>
 
+      <SearchBar />
       <BookmarkList onEdit={handleEdit} onDelete={handleDelete} />
       <TagSidebar />
 
