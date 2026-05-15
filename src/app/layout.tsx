@@ -17,15 +17,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen antialiased">
-        <div className="container mx-auto px-4 py-8">
-          <Header />
-          <main>
-            <ThemeProvider>
-              <BookmarksProvider>{children}</BookmarksProvider>
-            </ThemeProvider>
-          </main>
-          <footer></footer>
-        </div>
+        <ThemeProvider>
+          <BookmarksProvider>
+            <div className="container mx-auto px-4 py-8">
+              <Header />
+              <main>{children}</main>
+              <footer></footer>
+            </div>
+          </BookmarksProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

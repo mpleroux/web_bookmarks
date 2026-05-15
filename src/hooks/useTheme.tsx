@@ -1,35 +1,20 @@
 "use client";
 
-import { useContext, createContext, useState, useEffect } from "react";
+import { useContext, createContext, useState } from "react";
 import type { ReactNode } from "react";
-import { ThemeContextType } from "@/types";
+import type { ThemeContextType } from "@/types";
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  // Move applyTheme before the effect that uses it
-  const applyTheme = (dark: boolean) => {
-    if (dark) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  };
-
-  // Use lazy initialization to set initial state from system preference
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    if (typeof window === "undefined") return false; // SSR safety
-    return window.matchMedia("(prefers-color-scheme: dark)").matches;
-  });
-
-  // Separate effect to apply theme whenever state changes
-  useEffect(() => {
-    applyTheme(isDarkMode);
-  }, [isDarkMode]);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const toggleTheme = () => {
-    const newMode = !isDarkMode;
-    setIsDarkMode(newMode);
+    setIsDarkMode((prev) => {
+      const newMode = !prev;
+      document.documentElement.classList.toggle("dark", newMode);
+      return newMode;
+    });
   };
 
   return (

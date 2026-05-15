@@ -1,12 +1,12 @@
-// import SearchBar
-// import ThemeToggle
+import SearchBar from "./SearchBar";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   return (
     <header>
       <h1>Web Bookmarks</h1>
-      <div></div> {/* SearchBar */}
-      <div></div> {/* ThemeToggle */}
+      <SearchBar />
+      <ThemeToggle />
     </header>
   );
 }
