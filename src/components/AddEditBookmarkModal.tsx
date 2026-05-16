@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { SubmitEvent } from "react";
 import type { Bookmark } from "@/types";
 import { useBookmarks } from "@/hooks/useBookmarks";
+import Modal from "./Modal";
 
 interface AddEditBookmarkModalProps {
   bookmark?: Bookmark;
@@ -50,7 +51,7 @@ export default function AddEditBookmarkModal({
   };
 
   return (
-    <div>
+    <Modal onClose={onClose}>
       <h2>{isEditMode ? "Edit Bookmark" : "Add Bookmark"}</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -97,6 +98,6 @@ export default function AddEditBookmarkModal({
           </button>
         </div>
       </form>
-    </div>
+    </Modal>
   );
 }

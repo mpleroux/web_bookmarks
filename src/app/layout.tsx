@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { BookmarksProvider } from "@/hooks/useBookmarks";
 import { ThemeProvider } from "@/hooks/useTheme";
-import Header from "@/components/Header";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,8 +18,7 @@ export default function RootLayout({
       <body className="min-h-screen antialiased">
         <ThemeProvider>
           <BookmarksProvider>
-            <div className="container mx-auto px-4 py-8">
-              <Header />
+            <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6">
               <main>{children}</main>
               <footer></footer>
             </div>

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { Bookmark } from "@/types";
 import { useBookmarks } from "@/hooks/useBookmarks";
+import Modal from "./Modal";
 
 interface DeleteConfirmationModalProps {
   bookmark: Bookmark;
@@ -31,7 +32,7 @@ export default function DeleteConfirmationModal({
   };
 
   return (
-    <div>
+    <Modal onClose={onClose}>
       <h2>Delete Bookmark</h2>
       <p>Are you sure you want to delete &quot;{bookmark.title}&quot;?</p>
       {error && <p>{error}</p>}
@@ -44,6 +45,6 @@ export default function DeleteConfirmationModal({
           {isDeleting ? "Deleting..." : "Delete"}
         </button>
       </div>
-    </div>
+    </Modal>
   );
 }

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import type { Bookmark } from "@/types";
 import { useBookmarks } from "@/hooks/useBookmarks";
 import Layout from "@/components/Layout";
+import Header from "@/components/Header";
 import BookmarkList from "@/components/BookmarkList";
 import AddEditBookmarkModal from "@/components/AddEditBookmarkModal";
 import DeleteConfirmationModal from "@/components/DeleteConfirmationModal";
@@ -58,16 +59,22 @@ export default function Home() {
 
   return (
     <Layout>
-      <button type="button" onClick={handleAdd}>
-        Add Bookmark
-      </button>
+      <Header onAdd={handleAdd} />
 
-      <button type="button" onClick={handleOpenFilter}>
-        Filter by Tag
-      </button>
+      <div className="flex gap-6">
+        <div className="min-w-0 shrink grow basis-0">
+          <BookmarkList onEdit={handleEdit} onDelete={handleDelete} />
+        </div>
+        <aside className="hidden w-48 shrink-0 md:block">
+          <TagSidebar />
+        </aside>
+      </div>
 
-      <BookmarkList onEdit={handleEdit} onDelete={handleDelete} />
-      <TagSidebar />
+      <div className="mb-6 flex gap-3">
+        <button type="button" onClick={handleOpenFilter} className="md:hidden">
+          Filter by Tag
+        </button>
+      </div>
 
       {isAddEditModalOpen && (
         <AddEditBookmarkModal
