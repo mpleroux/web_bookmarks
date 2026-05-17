@@ -33,11 +33,13 @@ export default function DeleteConfirmationModal({
 
   return (
     <Modal onClose={onClose}>
-      <h2>Delete Bookmark</h2>
-      <p>Are you sure you want to delete &quot;{bookmark.title}&quot;?</p>
-      {error && <p>{error}</p>}
+      <h2 className="text-lg">Delete Bookmark</h2>
 
-      <div>
+      <p>Are you sure you want to delete &quot;{bookmark.title}&quot;?</p>
+
+      {error && <div className="mb-4">{error}</div>}
+
+      <div className="flex justify-end gap-3">
         <button type="button" onClick={onClose}>
           Cancel
         </button>

@@ -3,7 +3,19 @@
 import { useBookmarks } from "@/hooks/useBookmarks";
 
 export default function TagSidebar() {
-  const { allTags, selectedTags, filterByTag, clearFilters } = useBookmarks();
+  const { bookmarks, allTags, selectedTags, filterByTag, clearFilters } =
+    useBookmarks();
+
+  // count number of bookmarks that use each tag
+  const tagCounts = bookmarks.reduce<Record<string, number>>(
+    (acc, bookmark) => {
+      bookmark.tags.forEach((tag) => {
+        acc[tag] = (acc[tag] ?? 0) + 1;
+      });
+      return acc;
+    },
+    {},
+  );
 
   return (
     <>
@@ -15,7 +27,7 @@ export default function TagSidebar() {
           key={tag}
           onClick={() => filterByTag(tag)}
           className={`tag-pill md:my-2 md:block ${selectedTags.includes(tag) ? "tag-pill-active" : ""}`}>
-          {tag}
+          {tag} <span className="ml-1">({tagCounts[tag]})</span>
         </button>
       ))}
 

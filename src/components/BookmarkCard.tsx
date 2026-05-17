@@ -39,7 +39,7 @@ export default function BookmarkCard({
           href={bookmark.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="mb-2 block w-fit truncate text-sm text-gray-500 dark:text-gray-400">
+          className="mb-2 block w-fit truncate text-xs text-gray-500 dark:text-gray-400">
           {bookmark.url}
         </a>
 

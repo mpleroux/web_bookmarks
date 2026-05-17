@@ -52,9 +52,11 @@ export default function AddEditBookmarkModal({
 
   return (
     <Modal onClose={onClose}>
-      <h2>{isEditMode ? "Edit Bookmark" : "Add Bookmark"}</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <h2 className="text-lg">
+        {isEditMode ? "Edit Bookmark" : "Add Bookmark"}
+      </h2>
+      <form onSubmit={handleSubmit} className="text-sm">
+        <div className="mb-4">
           <label htmlFor="title">Title</label>
           <input
             id="title"
@@ -62,10 +64,11 @@ export default function AddEditBookmarkModal({
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
+            className="text-xs"
           />
         </div>
 
-        <div>
+        <div className="mb-4">
           <label htmlFor="url">URL</label>
           <input
             id="url"
@@ -73,27 +76,29 @@ export default function AddEditBookmarkModal({
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             required
+            className="text-xs"
           />
         </div>
 
-        <div>
+        <div className="mb-4">
           <label htmlFor="tags">Tags (comma-separated)</label>
           <input
             id="tags"
             type="text"
             value={tagsInput}
             onChange={(e) => setTagsInput(e.target.value)}
+            className="text-xs"
           />
         </div>
 
-        {error && <p>{error}</p>}
+        {error && <div className="mb-4">{error}</div>}
 
-        <div>
+        <div className="flex justify-end gap-3">
           <button type="button" onClick={onClose}>
             Cancel
           </button>
 
-          <button type="submit" disabled={isSubmitting}>
+          <button type="submit" disabled={isSubmitting} className="px-3">
             {isSubmitting ? "Saving..." : "Save"}
           </button>
         </div>
