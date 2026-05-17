@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import type { Bookmark } from "@/types";
 import { useBookmarks } from "@/hooks/useBookmarks";
-import Layout from "@/components/Layout";
 import Header from "@/components/Header";
 import BookmarkList from "@/components/BookmarkList";
 import AddEditBookmarkModal from "@/components/AddEditBookmarkModal";
