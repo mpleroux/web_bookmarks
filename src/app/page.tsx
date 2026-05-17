@@ -8,7 +8,7 @@ import Header from "@/components/Header";
 import BookmarkList from "@/components/BookmarkList";
 import AddEditBookmarkModal from "@/components/AddEditBookmarkModal";
 import DeleteConfirmationModal from "@/components/DeleteConfirmationModal";
-import FilterByTagModal from "@/components/FilterByTagModal";
+import TagModal from "@/components/TagModal";
 import TagSidebar from "@/components/TagSidebar";
 
 export default function Home() {
@@ -58,7 +58,7 @@ export default function Home() {
   };
 
   return (
-    <Layout>
+    <>
       <Header onAdd={handleAdd} />
 
       <div className="mb-4 md:hidden">
@@ -89,7 +89,7 @@ export default function Home() {
         />
       )}
 
-      {isFilterModalOpen && <FilterByTagModal onClose={handleCloseFilter} />}
-    </Layout>
+      {isFilterModalOpen && <TagModal onClose={handleCloseFilter} />}
+    </>
   );
 }
