@@ -7,16 +7,23 @@ export default function TagList() {
 
   return (
     <>
+      <h2 className="text-sm">Tags</h2>
+
       {allTags.map((tag) => (
-        <button type="button" key={tag} onClick={() => filterByTag(tag)}>
-          {selectedTags.includes(tag) ? "✓ " : ""}
+        <button
+          type="button"
+          key={tag}
+          onClick={() => filterByTag(tag)}
+          className={`tag-pill md:my-2 md:block ${selectedTags.includes(tag) ? "tag-pill-active" : ""}`}>
           {tag}
         </button>
       ))}
 
-      <button type="button" onClick={clearFilters}>
-        Clear Filters
-      </button>
+      {selectedTags.length > 0 && (
+        <button type="button" onClick={clearFilters} className="mb-2">
+          Clear Filters
+        </button>
+      )}
     </>
   );
 }

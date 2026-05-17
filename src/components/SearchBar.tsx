@@ -7,12 +7,13 @@ export default function SearchBar() {
 
   return (
     <>
-      <label htmlFor="search">Search</label>
       <input
         id="search"
         type="text"
         value={searchQuery}
+        placeholder="Search bookmarks..."
         onChange={(e) => search(e.target.value)}
+        className="text-xs"
       />
     </>
   );

@@ -61,6 +61,12 @@ export default function Home() {
     <Layout>
       <Header onAdd={handleAdd} />
 
+      <div className="mb-4 md:hidden">
+        <button type="button" onClick={handleOpenFilter}>
+          Filter by Tag
+        </button>
+      </div>
+
       <div className="flex gap-6">
         <div className="min-w-0 shrink grow basis-0">
           <BookmarkList onEdit={handleEdit} onDelete={handleDelete} />
@@ -68,12 +74,6 @@ export default function Home() {
         <aside className="hidden w-48 shrink-0 md:block">
           <TagSidebar />
         </aside>
-      </div>
-
-      <div className="mb-6 flex gap-3">
-        <button type="button" onClick={handleOpenFilter} className="md:hidden">
-          Filter by Tag
-        </button>
       </div>
 
       {isAddEditModalOpen && (
