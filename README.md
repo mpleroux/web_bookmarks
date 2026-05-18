@@ -58,6 +58,7 @@ graph TD
     BookmarkList --> BookmarkCard
     AddEditBookmarkModal --> Modal
     DeleteConfirmationModal --> Modal
+    TagModal --> Modal
 ```
 
 ## Screenshot
