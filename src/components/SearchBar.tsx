@@ -9,7 +9,7 @@ export default function SearchBar() {
     <>
       <input
         id="search"
-        type="text"
+        type="search"
         value={searchQuery}
         placeholder="Search bookmarks..."
         onChange={(e) => search(e.target.value)}

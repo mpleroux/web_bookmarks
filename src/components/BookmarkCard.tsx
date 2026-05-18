@@ -2,6 +2,7 @@
 
 import type { Bookmark } from "@/types";
 import { useBookmarks } from "@/hooks/useBookmarks";
+import { useAuth } from "@/hooks/useAuth";
 
 interface BookmarkCardProps {
   bookmark: Bookmark;
@@ -15,6 +16,7 @@ export default function BookmarkCard({
   onDelete,
 }: BookmarkCardProps) {
   const { filterByTag, selectedTags } = useBookmarks();
+  const { user } = useAuth();
   const formattedDate = new Date(bookmark.updated_at).toLocaleDateString(
     "en-US",
     {
@@ -62,14 +64,16 @@ export default function BookmarkCard({
         </span>
       </div>
 
-      <div className="flex shrink-0 gap-1.5 pt-0.5">
-        <button type="button" onClick={() => onEdit(bookmark)}>
-          Edit
-        </button>
-        <button type="button" onClick={() => onDelete(bookmark)}>
-          Delete
-        </button>
-      </div>
+      {user && (
+        <div className="flex shrink-0 gap-1.5 pt-0.5">
+          <button type="button" onClick={() => onEdit(bookmark)}>
+            Edit
+          </button>
+          <button type="button" onClick={() => onDelete(bookmark)}>
+            Delete
+          </button>
+        </div>
+      )}
     </article>
   );
 }

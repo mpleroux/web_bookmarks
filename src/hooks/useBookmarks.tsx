@@ -61,6 +61,11 @@ export const BookmarksProvider = ({ children }: { children: ReactNode }) => {
       setError(null);
 
       try {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+        if (!user) throw new Error("Not authenticated");
+
         const { data, error: supabaseError } = await supabase
           .from("bookmarks")
           .insert([
@@ -68,7 +73,7 @@ export const BookmarksProvider = ({ children }: { children: ReactNode }) => {
               title,
               url,
               tags,
-              user_id: "00000000-0000-0000-0000-000000000001", // Will be replaced with actual user_id with authentication
+              user_id: user.id,
             },
           ])
           .select(); // Retrieve inserted data to add to state immediately

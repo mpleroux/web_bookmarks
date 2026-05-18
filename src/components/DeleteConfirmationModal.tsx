@@ -37,7 +37,9 @@ export default function DeleteConfirmationModal({
 
       <p>Are you sure you want to delete &quot;{bookmark.title}&quot;?</p>
 
-      {error && <div className="mb-4">{error}</div>}
+      {error && (
+        <div className="mb-4 text-red-600 dark:text-red-400">{error}</div>
+      )}
 
       <div className="flex justify-end gap-3">
         <button type="button" onClick={onClose}>
