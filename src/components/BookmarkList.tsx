@@ -10,7 +10,14 @@ interface BookmarkListProps {
 }
 
 export default function BookmarkList({ onEdit, onDelete }: BookmarkListProps) {
-  const { getFilteredBookmarks } = useBookmarks();
+  const { isLoading, error, getFilteredBookmarks } = useBookmarks();
+
+  if (isLoading) {
+    return <p>Loading bookmarks...</p>;
+  }
+  if (error) {
+    return <p className="text-red-600 dark:text-red-400">{error}</p>;
+  }
 
   return (
     <>

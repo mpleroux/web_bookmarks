@@ -48,7 +48,7 @@ export const BookmarksProvider = ({ children }: { children: ReactNode }) => {
       setAllTags(Array.from(tags).sort());
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : "Failed to fetch bookmarks",
+        err instanceof Error ? err.message : "Failed to fetch bookmarks.",
       );
     } finally {
       setIsLoading(false);
@@ -87,7 +87,9 @@ export const BookmarksProvider = ({ children }: { children: ReactNode }) => {
           setAllTags(Array.from(newTags).sort());
         }
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to add bookmark");
+        setError(
+          err instanceof Error ? err.message : "Failed to add bookmark.",
+        );
         throw err;
       } finally {
         setIsLoading(false);
@@ -130,7 +132,7 @@ export const BookmarksProvider = ({ children }: { children: ReactNode }) => {
         setAllTags(Array.from(newTags).sort());
       } catch (err) {
         setError(
-          err instanceof Error ? err.message : "Failed to update bookmark",
+          err instanceof Error ? err.message : "Failed to update bookmark.",
         );
         throw err;
       } finally {
@@ -167,7 +169,7 @@ export const BookmarksProvider = ({ children }: { children: ReactNode }) => {
         setAllTags(Array.from(newTags).sort());
       } catch (err) {
         setError(
-          err instanceof Error ? err.message : "Failed to delete bookmark",
+          err instanceof Error ? err.message : "Failed to delete bookmark.",
         );
         throw err;
       } finally {
