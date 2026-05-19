@@ -33,7 +33,9 @@ export default function DeleteConfirmationModal({
 
   return (
     <Modal onClose={onClose}>
-      <h2 className="text-lg">Delete Bookmark</h2>
+      <h2 id="modal-title" className="text-lg">
+        Delete Bookmark
+      </h2>
 
       <p>Are you sure you want to delete &quot;{bookmark.title}&quot;?</p>
 

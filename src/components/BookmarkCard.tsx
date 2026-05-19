@@ -52,6 +52,7 @@ export default function BookmarkCard({
                 key={tag}
                 type="button"
                 onClick={() => filterByTag(tag)}
+                aria-pressed={selectedTags.includes(tag)}
                 className={`tag-pill ${selectedTags.includes(tag) ? "tag-pill-active" : ""}`}>
                 {tag}
               </button>
@@ -66,10 +67,16 @@ export default function BookmarkCard({
 
       {user && (
         <div className="flex shrink-0 gap-1.5 pt-0.5">
-          <button type="button" onClick={() => onEdit(bookmark)}>
+          <button
+            type="button"
+            aria-label={`Edit ${bookmark.title}`}
+            onClick={() => onEdit(bookmark)}>
             Edit
           </button>
-          <button type="button" onClick={() => onDelete(bookmark)}>
+          <button
+            type="button"
+            aria-label={`Delete ${bookmark.title}`}
+            onClick={() => onDelete(bookmark)}>
             Delete
           </button>
         </div>

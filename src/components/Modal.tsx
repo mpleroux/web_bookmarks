@@ -10,6 +10,9 @@ interface ModalProps {
 export default function Modal({ children, onClose }: ModalProps) {
   return (
     <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
       onClick={onClose}>
       <div

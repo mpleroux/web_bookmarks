@@ -8,7 +8,9 @@ export default function TagModal({ onClose }: { onClose: () => void }) {
 
   return (
     <Modal onClose={onClose}>
-      <h2 className="text-lg">Tags</h2>
+      <h2 id="modal-title" className="text-lg">
+        Tags
+      </h2>
 
       <div className="mb-4">
         {allTags.map((tag) => (
@@ -16,6 +18,7 @@ export default function TagModal({ onClose }: { onClose: () => void }) {
             key={tag}
             type="button"
             onClick={() => filterByTag(tag)}
+            aria-pressed={selectedTags.includes(tag)}
             className={`tag-pill m-1 ${selectedTags.includes(tag) ? "tag-pill-active" : ""}`}>
             {tag}
           </button>

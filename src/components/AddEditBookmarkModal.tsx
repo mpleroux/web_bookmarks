@@ -52,7 +52,7 @@ export default function AddEditBookmarkModal({
 
   return (
     <Modal onClose={onClose}>
-      <h2 className="text-lg">
+      <h2 id="modal-title" className="text-lg">
         {isEditMode ? "Edit Bookmark" : "Add Bookmark"}
       </h2>
       <form onSubmit={handleSubmit} className="text-sm">

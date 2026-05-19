@@ -26,7 +26,11 @@ export default function Header({ onAdd }: HeaderProps) {
       </div>
       <div className="flex items-center gap-3">
         {user && (
-          <button type="button" onClick={onAdd} className="self-center">
+          <button
+            type="button"
+            aria-label="Add bookmark"
+            onClick={onAdd}
+            className="self-center">
             + Add
           </button>
         )}

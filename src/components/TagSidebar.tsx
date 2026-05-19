@@ -26,6 +26,7 @@ export default function TagSidebar() {
           type="button"
           key={tag}
           onClick={() => filterByTag(tag)}
+          aria-pressed={selectedTags.includes(tag)}
           className={`tag-pill md:my-2 md:block ${selectedTags.includes(tag) ? "tag-pill-active" : ""}`}>
           {tag} <span className="ml-1">({tagCounts[tag]})</span>
         </button>
