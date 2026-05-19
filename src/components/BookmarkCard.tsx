@@ -27,7 +27,7 @@ export default function BookmarkCard({
   );
 
   return (
-    <article className="flex items-start justify-between gap-4 border-b border-gray-200 px-3 py-4 transition-colors hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800/50">
+    <article className="flex items-start justify-between gap-4 border-b border-gray-200 py-4 transition-colors hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800/50">
       <div className="min-w-0 shrink grow basis-0">
         <a
           href={bookmark.url}

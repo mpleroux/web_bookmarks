@@ -26,19 +26,22 @@ export default function Header({ onAdd }: HeaderProps) {
       </div>
       <div className="flex gap-3">
         {user && (
-          <button type="button" onClick={onAdd}>
+          <button type="button" onClick={onAdd} className="self-center">
             + Add
           </button>
         )}
         {user ? (
-          <button type="button" onClick={handleSignOut}>
+          <button type="button" onClick={handleSignOut} className="self-center">
             Sign Out
             <span className="hidden pl-1 sm:inline">
               ({user.email?.split("@")[0]})
             </span>
           </button>
         ) : (
-          <button type="button" onClick={() => router.push("/login")}>
+          <button
+            type="button"
+            onClick={() => router.push("/login")}
+            className="self-center">
             Sign In
           </button>
         )}

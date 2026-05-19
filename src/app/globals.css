@@ -93,4 +93,7 @@
   .btn-secondary {
     @apply border border-button bg-transparent text-page-text hover:bg-gray-100 dark:hover:bg-gray-800;
   }
+  .btn-icon {
+    @apply bg-transparent px-1 py-1 hover:bg-transparent;
+  }
 }
