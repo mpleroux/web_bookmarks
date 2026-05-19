@@ -76,9 +76,7 @@ export default function LoginPage() {
           />
         </div>
 
-        {error && (
-          <div className="mb-4 text-red-600 dark:text-red-400">{error}</div>
-        )}
+        {error && <div className="error-message">{error}</div>}
 
         <div className="mb-4">
           <button

@@ -91,11 +91,9 @@ export default function AddEditBookmarkModal({
           />
         </div>
 
-        {error && (
-          <div className="mb-4 text-red-600 dark:text-red-400">{error}</div>
-        )}
+        {error && <div className="error-message">{error}</div>}
 
-        <div className="flex justify-end gap-3">
+        <div className="modal-footer">
           <button type="button" onClick={onClose}>
             Cancel
           </button>

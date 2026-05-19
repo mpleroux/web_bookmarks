@@ -84,16 +84,22 @@
     @apply cursor-pointer rounded bg-button px-2 py-1 text-xs font-semibold text-white transition hover:cursor-pointer hover:bg-button-hover;
   }
 
+  .btn-icon {
+    @apply bg-transparent px-1 py-1 hover:bg-transparent;
+  }
+  .btn-secondary {
+    @apply border border-button bg-transparent text-page-text hover:bg-gray-100 dark:hover:bg-gray-800;
+  }
+  .error-message {
+    @apply mb-4 text-red-600 dark:text-red-400;
+  }
+  .modal-footer {
+    @apply flex justify-end gap-3;
+  }
   .tag-pill {
     @apply rounded-full bg-gray-200 px-2 py-0.5 text-xs text-gray-500 transition hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600;
   }
   .tag-pill-active {
     @apply bg-gray-700 text-white dark:bg-gray-300 dark:text-gray-900;
-  }
-  .btn-secondary {
-    @apply border border-button bg-transparent text-page-text hover:bg-gray-100 dark:hover:bg-gray-800;
-  }
-  .btn-icon {
-    @apply bg-transparent px-1 py-1 hover:bg-transparent;
   }
 }

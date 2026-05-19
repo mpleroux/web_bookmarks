@@ -37,13 +37,13 @@ export default function DeleteConfirmationModal({
         Delete Bookmark
       </h2>
 
-      <p>Are you sure you want to delete &quot;{bookmark.title}&quot;?</p>
+      <p className="text-sm">
+        Are you sure you want to delete &quot;{bookmark.title}&quot;?
+      </p>
 
-      {error && (
-        <div className="mb-4 text-red-600 dark:text-red-400">{error}</div>
-      )}
+      {error && <div className="error-message">{error}</div>}
 
-      <div className="flex justify-end gap-3">
+      <div className="modal-footer">
         <button type="button" onClick={onClose}>
           Cancel
         </button>

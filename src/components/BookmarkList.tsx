@@ -16,7 +16,7 @@ export default function BookmarkList({ onEdit, onDelete }: BookmarkListProps) {
     return <p>Loading bookmarks...</p>;
   }
   if (error) {
-    return <p className="text-red-600 dark:text-red-400">{error}</p>;
+    return <p className="error-message">{error}</p>;
   }
 
   return (
