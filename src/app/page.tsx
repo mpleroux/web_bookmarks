@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import type { Bookmark } from "@/types";
 import { useBookmarks } from "@/hooks/useBookmarks";
+import { useAuth } from "@/hooks/useAuth";
 import Header from "@/components/Header";
 import BookmarkList from "@/components/BookmarkList";
 import AddEditBookmarkModal from "@/components/AddEditBookmarkModal";
@@ -19,9 +20,11 @@ export default function Home() {
     Bookmark | undefined
   >(undefined);
 
+  const { user } = useAuth();
+
   useEffect(() => {
     fetchBookmarks();
-  }, [fetchBookmarks]);
+  }, [fetchBookmarks, user]);
 
   const handleAdd = () => {
     setSelectedBookmark(undefined);

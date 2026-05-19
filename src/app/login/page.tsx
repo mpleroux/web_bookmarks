@@ -11,18 +11,38 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitting, setSubmitting] = useState<"credentials" | "guest" | null>(
+    null,
+  );
 
   const handleSubmit = async (e: SubmitEvent) => {
     e.preventDefault();
     setError(null);
-    setIsSubmitting(true);
+    setSubmitting("credentials");
 
     const { error } = await signIn(email, password);
 
     if (error) {
       setError(error);
-      setIsSubmitting(false);
+      setSubmitting(null);
+    } else {
+      router.push("/");
+    }
+  };
+
+  const handleGuestSignIn = async () => {
+    setError(null);
+    setSubmitting("guest");
+
+    // Known security risk for demo purposes
+    const { error } = await signIn(
+      process.env.NEXT_PUBLIC_GUEST_EMAIL!,
+      process.env.NEXT_PUBLIC_GUEST_PASSWORD!,
+    );
+
+    if (error) {
+      setError(error);
+      setSubmitting(null);
     } else {
       router.push("/");
     }
@@ -60,10 +80,31 @@ export default function LoginPage() {
           <div className="mb-4 text-red-600 dark:text-red-400">{error}</div>
         )}
 
-        <button type="submit" disabled={isSubmitting} className="px-3">
-          {isSubmitting ? "Signing in..." : "Sign In"}
-        </button>
+        <div className="mb-4">
+          <button
+            type="submit"
+            disabled={submitting !== null}
+            className="mr-3 px-3">
+            {submitting === "credentials" ? "Signing in..." : "Sign In"}
+          </button>
+
+          <button type="button" onClick={() => router.back()}>
+            Cancel
+          </button>
+        </div>
       </form>
+
+      <hr className="my-4 border-gray-300 dark:border-gray-600"></hr>
+
+      <div>
+        <button
+          type="button"
+          onClick={handleGuestSignIn}
+          disabled={submitting !== null}
+          className="btn-secondary">
+          {submitting === "guest" ? "Signing in..." : "Sign in as Guest"}
+        </button>
+      </div>
     </div>
   );
 }

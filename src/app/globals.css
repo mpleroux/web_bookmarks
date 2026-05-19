@@ -88,4 +88,7 @@
   .tag-pill-active {
     @apply bg-gray-700 text-white dark:bg-gray-300 dark:text-gray-900;
   }
+  .btn-secondary {
+    @apply border border-button bg-transparent text-page-text hover:bg-gray-100 dark:hover:bg-gray-800;
+  }
 }
