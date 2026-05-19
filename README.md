@@ -1,6 +1,6 @@
 # README
 
-A website bookmarking site modeled on Pinboard.in using React and Next.js. Work-in-progress.
+A website bookmarking site modeled on Pinboard.in using React and Next.js.
 
 ## Features
 
