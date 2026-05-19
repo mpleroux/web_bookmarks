@@ -19,9 +19,9 @@ export default function Header({ onAdd }: HeaderProps) {
   };
 
   return (
-    <header className="mb-6 flex items-center gap-4">
+    <header className="mb-6 flex items-center justify-between gap-4 xs:justify-normal">
       <h1 className="mb-0 shrink-0 text-lg">Web Bookmarks</h1>
-      <div className="shrink grow basis-0">
+      <div className="hidden shrink grow basis-0 xs:block">
         <SearchBar />
       </div>
       {user && (
@@ -38,7 +38,9 @@ export default function Header({ onAdd }: HeaderProps) {
           Sign In
         </button>
       )}
-      <ThemeToggle />
+      <div className="hidden xs:block">
+        <ThemeToggle />
+      </div>
     </header>
   );
 }

@@ -4,6 +4,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  --breakpoint-xs: 480px;
+
   /* set default (light mode) values */
   --color-page-bg: var(--color-gray-100);
   --color-page-text: var(--color-gray-800);
