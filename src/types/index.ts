@@ -9,19 +9,6 @@ export interface Bookmark {
   updated_at: string; // ISO timestamp
 }
 
-// Supabase Auth types
-export interface User {
-  id: string;
-  email: string;
-  user_metadata?: Record<string, unknown>;
-}
-
-export interface Session {
-  user: User;
-  access_token: string;
-  refresh_token?: string;
-}
-
 // BookmarksContext type
 export interface BookmarksContextType {
   bookmarks: Bookmark[];

@@ -6,15 +6,14 @@ export default function SearchBar() {
   const { search, searchQuery } = useBookmarks();
 
   return (
-    <>
-      <input
-        id="search"
-        type="search"
-        value={searchQuery}
-        placeholder="Search bookmarks..."
-        onChange={(e) => search(e.target.value)}
-        className="text-xs"
-      />
-    </>
+    <input
+      aria-label="Search bookmarks"
+      id="search"
+      type="search"
+      value={searchQuery}
+      placeholder="Search bookmarks..."
+      onChange={(e) => search(e.target.value)}
+      className="text-xs"
+    />
   );
 }

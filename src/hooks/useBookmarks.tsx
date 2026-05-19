@@ -2,7 +2,7 @@
 
 import { useContext, createContext, useState, useCallback } from "react";
 import type { ReactNode } from "react";
-import { Bookmark, BookmarksContextType } from "@/types";
+import type { Bookmark, BookmarksContextType } from "@/types";
 import { supabase } from "@/utils/supabase";
 
 const BookmarksContext = createContext<BookmarksContextType | undefined>(
@@ -17,12 +17,18 @@ export const BookmarksProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const recalculateTags = (bookmarks: Bookmark[]) => {
+    const tags = new Set<string>();
+    bookmarks.forEach((b) => b.tags.forEach((tag) => tags.add(tag)));
+    setAllTags(Array.from(tags).sort());
+  };
+
   // Core Actions (with Supabase Integration)
   const fetchBookmarks = useCallback(async () => {
     setIsLoading(true);
     setError(null);
 
-    // Query Supabse: SELECT * FROM bookmarks ordered by newest first
+    // Query Supabase: SELECT * FROM bookmarks ordered by newest first
     try {
       const { data, error: supabaseError } = await supabase
         .from("bookmarks")
@@ -31,21 +37,8 @@ export const BookmarksProvider = ({ children }: { children: ReactNode }) => {
 
       if (supabaseError) throw supabaseError;
 
-      // Update bookmarks state with returned data
       setBookmarks(data || []);
-
-      // Extract unique tags
-      // Loop through all bookmarks, collect every tag into a Set,
-      // sort alphabetically, store in allTags
-      const tags = new Set<string>();
-
-      (data || []).forEach((bookmark: Bookmark) => {
-        bookmark.tags.forEach((tag: string) => {
-          tags.add(tag);
-        });
-      });
-
-      setAllTags(Array.from(tags).sort());
+      recalculateTags(data || []);
     } catch (err) {
       setError(
         err instanceof Error ? err.message : "Failed to fetch bookmarks.",
@@ -68,28 +61,15 @@ export const BookmarksProvider = ({ children }: { children: ReactNode }) => {
 
         const { data, error: supabaseError } = await supabase
           .from("bookmarks")
-          .insert([
-            {
-              title,
-              url,
-              tags,
-              user_id: user.id,
-            },
-          ])
-          .select(); // Retrieve inserted data to add to state immediately
+          .insert([{ title, url, tags, user_id: user.id }])
+          .select();
 
         if (supabaseError) throw supabaseError;
 
         if (data && data.length > 0) {
-          // Prepend new bookmark to top of bookmarks array (most recent first)
-          setBookmarks((prev) => [data[0], ...prev]);
-
-          // Add any new tags from the bookmark to allTags if they don't exist
-          const newTags = new Set(allTags);
-          tags.forEach((tag) => {
-            newTags.add(tag);
-          });
-          setAllTags(Array.from(newTags).sort());
+          const newBookmarks = [data[0] as Bookmark, ...bookmarks];
+          setBookmarks(newBookmarks);
+          recalculateTags(newBookmarks);
         }
       } catch (err) {
         setError(
@@ -100,7 +80,7 @@ export const BookmarksProvider = ({ children }: { children: ReactNode }) => {
         setIsLoading(false);
       }
     },
-    [allTags],
+    [bookmarks],
   );
 
   const updateBookmark = useCallback(
@@ -125,16 +105,7 @@ export const BookmarksProvider = ({ children }: { children: ReactNode }) => {
         );
 
         setBookmarks(updatedBookmarksArray);
-
-        // Recalculate all tags from updated bookmarks
-        // (remove tags no longer in use, add new ones)
-        const newTags = new Set<string>();
-        updatedBookmarksArray.forEach((b) => {
-          b.tags.forEach((tag) => {
-            newTags.add(tag);
-          });
-        });
-        setAllTags(Array.from(newTags).sort());
+        recalculateTags(updatedBookmarksArray);
       } catch (err) {
         setError(
           err instanceof Error ? err.message : "Failed to update bookmark.",
@@ -151,7 +122,7 @@ export const BookmarksProvider = ({ children }: { children: ReactNode }) => {
     async (id: string) => {
       setIsLoading(true);
       setError(null);
-      // Delete the bookmark row from Supabase
+
       try {
         const { error: supabaseError } = await supabase
           .from("bookmarks")
@@ -160,18 +131,9 @@ export const BookmarksProvider = ({ children }: { children: ReactNode }) => {
 
         if (supabaseError) throw supabaseError;
 
-        // Remove the bookmark from bookmarks state
         const bookmarksAfterDelete = bookmarks.filter((b) => b.id !== id);
         setBookmarks(bookmarksAfterDelete);
-
-        // Recalculate tags, removing orphaned ones
-        const newTags = new Set<string>();
-        bookmarksAfterDelete.forEach((b) => {
-          b.tags.forEach((tag) => {
-            newTags.add(tag);
-          });
-        });
-        setAllTags(Array.from(newTags).sort());
+        recalculateTags(bookmarksAfterDelete);
       } catch (err) {
         setError(
           err instanceof Error ? err.message : "Failed to delete bookmark.",
