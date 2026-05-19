@@ -19,12 +19,12 @@ export default function Header({ onAdd }: HeaderProps) {
   };
 
   return (
-    <header className="mb-6 flex items-center justify-between gap-3 xs:justify-normal">
+    <header className="mb-6 flex items-center justify-between gap-3">
       <h1 className="mb-0 shrink-0 text-lg">Web Bookmarks</h1>
-      <div className="hidden shrink grow basis-0 xs:block">
+      <div className="hidden max-w-xs shrink grow basis-0 xs:block">
         <SearchBar />
       </div>
-      <div className="flex gap-3">
+      <div className="flex items-center gap-3">
         {user && (
           <button type="button" onClick={onAdd} className="self-center">
             + Add
