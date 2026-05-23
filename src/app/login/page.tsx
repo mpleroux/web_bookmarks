@@ -11,6 +11,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  // Track which button is submitting so each shows its own loading state independently
   const [submitting, setSubmitting] = useState<"credentials" | "guest" | null>(
     null,
   );

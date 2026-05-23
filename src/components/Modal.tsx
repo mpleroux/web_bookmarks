@@ -8,6 +8,8 @@ interface ModalProps {
 }
 
 export default function Modal({ children, onClose }: ModalProps) {
+  // Click-outside-to-close: the backdrop's onClick fires onClose, and stopPropagation
+  // on the inner div prevents clicks inside the modal from reaching it
   return (
     <div
       role="dialog"

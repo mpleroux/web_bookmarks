@@ -28,17 +28,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // Restore the current session on mount
     supabase.auth.getUser().then(({ data }) => {
       setUser(data.user);
       setIsLoading(false);
     });
 
+    // Listen for future auth changes (sign-in, sign-out, token expiry in other tabs)
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_, session) => {
       setUser(session?.user ?? null);
     });
 
+    // Unsubscribe on unmount to prevent a memory leak
     return () => subscription.unsubscribe();
   }, []);
 

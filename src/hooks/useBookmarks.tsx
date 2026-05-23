@@ -17,13 +17,14 @@ export const BookmarksProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Derive the sorted list of all unique tags after any change to bookmarks
   const recalculateTags = (bookmarks: Bookmark[]) => {
     const tags = new Set<string>();
     bookmarks.forEach((b) => b.tags.forEach((tag) => tags.add(tag)));
     setAllTags(Array.from(tags).sort());
   };
 
-  // Core Actions (with Supabase Integration)
+  // Load all bookmarks the current user can access from Supabase, ordered newest first, and refresh the tag list
   const fetchBookmarks = useCallback(async () => {
     setIsLoading(true);
     setError(null);
@@ -48,6 +49,7 @@ export const BookmarksProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
+  // Insert a new bookmark in Supabase under the current user's account, then prepend it to local state
   const addBookmark = useCallback(
     async (title: string, url: string, tags: string[]) => {
       setIsLoading(true);
@@ -67,6 +69,7 @@ export const BookmarksProvider = ({ children }: { children: ReactNode }) => {
         if (supabaseError) throw supabaseError;
 
         if (data && data.length > 0) {
+          // Prepend locally instead of re-fetching to avoid a round-trip to Supabase
           const newBookmarks = [data[0] as Bookmark, ...bookmarks];
           setBookmarks(newBookmarks);
           recalculateTags(newBookmarks);
@@ -83,6 +86,7 @@ export const BookmarksProvider = ({ children }: { children: ReactNode }) => {
     [bookmarks],
   );
 
+  // Persist edits to a bookmark in Supabase (including a refreshed updated_at timestamp) and sync local state
   const updateBookmark = useCallback(
     async (id: string, title: string, url: string, tags: string[]) => {
       setIsLoading(true);
@@ -97,7 +101,7 @@ export const BookmarksProvider = ({ children }: { children: ReactNode }) => {
 
         if (supabaseError) throw supabaseError;
 
-        // Calculate updated bookmarks for tag recalculation
+        // Sync local state with the Supabase update to avoid a re-fetch
         const updatedBookmarksArray = bookmarks.map((b) =>
           b.id === id
             ? { ...b, title, url, tags, updated_at: new Date().toISOString() }
@@ -118,6 +122,7 @@ export const BookmarksProvider = ({ children }: { children: ReactNode }) => {
     [bookmarks],
   );
 
+  // Remove a bookmark from Supabase and filter it out of local state
   const deleteBookmark = useCallback(
     async (id: string) => {
       setIsLoading(true);
@@ -147,7 +152,7 @@ export const BookmarksProvider = ({ children }: { children: ReactNode }) => {
   );
 
   // Filter & Search Actions
-  // Toggle tag in selectedTags array
+  // Tags are additive: selecting multiple tags narrows results to bookmarks that match all of them
   const filterByTag = useCallback((tag: string): void => {
     setSelectedTags((prev) =>
       prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
@@ -163,7 +168,7 @@ export const BookmarksProvider = ({ children }: { children: ReactNode }) => {
     setSearchQuery(query);
   }, []);
 
-  // Computed Filtering Function
+  // Return bookmarks matching all selected tags (AND logic) and the search query (title or URL); return everything if no filters are active
   const getFilteredBookmarks = useCallback((): Bookmark[] => {
     return bookmarks.filter((bookmark) => {
       // Tag filtering (return bookmarks with all selected tags)

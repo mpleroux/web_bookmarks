@@ -22,6 +22,7 @@ export default function Home() {
 
   const { user } = useAuth();
 
+  // Re-fetch when auth state changes so the right bookmarks load after sign-in or sign-out
   useEffect(() => {
     fetchBookmarks();
   }, [fetchBookmarks, user]);

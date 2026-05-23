@@ -24,6 +24,7 @@ export default function AddEditBookmarkModal({
 
   const isEditMode = !!bookmark;
 
+  // Parse the tag input and dispatches to addBookmark or updateBookmark depending on whether a bookmark was passed in
   const handleSubmit = async (e: SubmitEvent) => {
     e.preventDefault();
     setError(null);

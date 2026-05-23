@@ -12,6 +12,7 @@ interface BookmarkListProps {
 export default function BookmarkList({ onEdit, onDelete }: BookmarkListProps) {
   const { bookmarks, isLoading, error, getFilteredBookmarks } = useBookmarks();
 
+  // Show a loading state only on the initial fetch; subsequent re-fetches keep existing bookmarks visible
   if (isLoading && bookmarks.length === 0) {
     return <p>Loading bookmarks...</p>;
   }
