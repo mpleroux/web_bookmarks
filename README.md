@@ -1,6 +1,8 @@
-# README
+# Web Bookmarks
 
 A website bookmarking site modeled on Pinboard.in using React and Next.js.
+
+Live demo: [mleroux-web-bookmarks.netlify.app](https://mleroux-web-bookmarks.netlify.app/)
 
 ## Features
 
